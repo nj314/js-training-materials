@@ -1,0 +1,23 @@
+{
+  "name": "js-training-materials",
+  "version": "1.0.0",
+  "description": "Resources for training &amp; practice in JS libraries and frameworks.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nj314/js-training-materials.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nj314/js-training-materials/issues"
+  },
+  "homepage": "https://github.com/nj314/js-training-materials#readme",
+  "dependencies": {
+    "jest": "^27.4.7",
+    "xstate": "^4.28.1"
+  }
+}
