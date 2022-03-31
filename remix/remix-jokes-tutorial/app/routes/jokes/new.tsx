@@ -1,6 +1,13 @@
-import { ActionFunction, json, redirect, useActionData } from "remix";
+import {
+  ActionFunction,
+  json,
+  LoaderFunction,
+  redirect,
+  useActionData,
+} from "remix";
 import { db } from "~/utils/db.server";
 import invariant from "tiny-invariant";
+import { requireUserId } from "~/utils/session.server";
 
 type ActionData = {
   formError?: string;
@@ -22,6 +29,7 @@ const validateJokeContent = (content: string) =>
   content.length < 10 ? "Too short" : undefined;
 
 export const action: ActionFunction = async ({ request }) => {
+  const userId = await requireUserId(request);
   const form = await request.formData();
   const name = form.get("name");
   const content = form.get("content");
@@ -41,8 +49,15 @@ export const action: ActionFunction = async ({ request }) => {
     return badRequest({ fieldErrors, fields });
   }
 
-  const joke = await db.joke.create({ data: fields });
+  const joke = await db.joke.create({
+    data: { ...fields, jokesterId: userId },
+  });
   return redirect(`/jokes/${joke.id}`);
+};
+
+export const loader: LoaderFunction = async ({ request }) => {
+  await requireUserId(request);
+  return null;
 };
 
 export default function NewJokeRoute() {
