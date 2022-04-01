@@ -24,3 +24,7 @@ export default function JokesIndexRoute() {
     </div>
   );
 }
+
+export function ErrorBoundary({ error }: { error: Error }) {
+  return <div className="error-container">{error.message}</div>;
+}
