@@ -1,4 +1,4 @@
-import { Links, LinksFunction, LiveReload, Outlet } from "remix";
+import { Links, LinksFunction, LiveReload, Outlet, Scripts } from "remix";
 import globalStylesUrl from "~/styles/global.css";
 import globalMediumStylesUrl from "~/styles/global-medium.css";
 import globalLargeStylesUrl from "~/styles/global-large.css";
@@ -33,6 +33,7 @@ function Document({
       </head>
       <body>
         {children}
+        <Scripts />
         <LiveReload />
       </body>
     </html>
@@ -48,6 +49,7 @@ export default function App() {
 }
 
 export function ErrorBoundary({ error }: { error: Error }) {
+  console.error(error);
   return (
     <Document title="Uh-oh!">
       <div className="error-container">
